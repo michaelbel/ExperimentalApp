@@ -1,7 +1,4 @@
-import org.apache.commons.io.output.ByteArrayOutputStream
-import java.io.FileInputStream
-import java.nio.charset.Charset
-import java.util.Properties
+import java.nio.charset.StandardCharsets
 
 plugins {
     alias(libs.plugins.android.application)
@@ -13,16 +10,16 @@ plugins {
 }
 
 private val gitCommitsCount: Int by lazy {
-    when {
-        System.getProperty("os.name").contains("Windows", ignoreCase = true) -> 1
-        else -> {
-            val stdout = ByteArrayOutputStream()
-            exec {
-                commandLine("git", "rev-list", "--count", "HEAD")
-                standardOutput = stdout
-            }
-            stdout.toString(Charset.defaultCharset()).trim().toInt()
+    try {
+        val isWindows = System.getProperty("os.name").contains("Windows", ignoreCase = true)
+        val processBuilder = when {
+            isWindows -> ProcessBuilder("cmd", "/c", "git", "rev-list", "--count", "HEAD")
+            else -> ProcessBuilder("git", "rev-list", "--count", "HEAD")
         }
+        processBuilder.redirectErrorStream(true)
+        processBuilder.start().inputStream.bufferedReader(StandardCharsets.UTF_8).readLine().trim().toInt()
+    } catch (_: Exception) {
+        1
     }
 }
 
@@ -65,7 +62,7 @@ android {
 }
 
 base {
-    archivesName.set("Mobile-Template-v${android.defaultConfig.versionName}(${android.defaultConfig.versionCode})") // Replace with your own app's name
+    archivesName.set("DayNightTheme-v${android.defaultConfig.versionName}(${android.defaultConfig.versionCode})")
 }
 
 dependencies {
