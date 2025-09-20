@@ -22,5 +22,5 @@ dependencyResolutionManagement {
 }
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "DayNightTheme"
+rootProject.name = "KotlinDataClass"
 include(":app")

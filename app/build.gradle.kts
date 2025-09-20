@@ -2,11 +2,8 @@ import java.nio.charset.StandardCharsets
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.google.ksp)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.parcelize)
 }
 
 private val gitCommitsCount: Int by lazy {
@@ -28,52 +25,55 @@ kotlin {
 }
 
 android {
-    namespace = "org.michaelbel.theme"
+    namespace = "org.michaelbel.kotlin_data_class"
     compileSdk = libs.versions.compile.sdk.get().toInt()
 
     defaultConfig {
-        applicationId = "org.michaelbel.theme"
+        applicationId = "org.michaelbel.kotlin_data_class"
         minSdk = libs.versions.min.sdk.get().toInt()
         targetSdk = libs.versions.target.sdk.get().toInt()
         versionCode = gitCommitsCount
         versionName = "1.0.0"
     }
 
-    buildTypes {
-        release {
-            isDebuggable = false
-            isMinifyEnabled = true
-            isShrinkResources = true
-            signingConfig = if (signingConfigs.findByName("release") != null) signingConfigs.getByName("release") else null
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+    /*signingConfigs {
+        getByName("debug") {
+            keyAlias = "plurals"
+            keyPassword = "password"
+            storeFile = rootProject.file(".github/debug-key.jks")
+            storePassword = "password"
         }
+    }*/
+
+    buildTypes {
         debug {
-            isDebuggable = true
-            isMinifyEnabled = false
-            isShrinkResources = false
-            applicationIdSuffix = ".debug"
+            //signingConfig = signingConfigs.getByName("debug")
         }
     }
 
     buildFeatures {
-        buildConfig = true
         compose = true
+        viewBinding = true
     }
 }
 
 base {
-    archivesName.set("DayNightTheme-v${android.defaultConfig.versionName}(${android.defaultConfig.versionCode})")
+    archivesName.set("KotlinDataClass-v${android.defaultConfig.versionName}(${android.defaultConfig.versionCode})")
 }
 
 dependencies {
+    implementation(libs.google.material)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.core.splashscreen)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.google.material)
+    implementation(libs.androidx.fragment.compose)
+    implementation(libs.androidx.navigation.compose)
 }
 
-tasks.register("printVersionName") { doLast { println(android.defaultConfig.versionName) } }
-tasks.register("printVersionCode") { doLast { println(android.defaultConfig.versionCode.toString()) } }
+tasks.register("printVersion") {
+    doLast {
+        println("VERSION_NAME=${android.defaultConfig.versionName}")
+        println("VERSION_CODE=${android.defaultConfig.versionCode}")
+    }
+}
