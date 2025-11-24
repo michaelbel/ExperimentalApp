@@ -1,4 +1,5 @@
 import java.nio.charset.StandardCharsets
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
     alias(libs.plugins.android.application)
@@ -22,6 +23,16 @@ private val gitCommitsCount: Int by lazy {
 
 kotlin {
     jvmToolchain(libs.versions.jdk.get().toInt())
+
+    compilerOptions {
+        languageVersion.set(KotlinVersion.KOTLIN_2_4)
+        freeCompilerArgs.add("-Xcontext-parameters")
+        freeCompilerArgs.add("-Xcontext-sensitive-resolution")
+        freeCompilerArgs.add("-Xannotation-target-all")
+        freeCompilerArgs.add("-Xnested-type-aliases")
+        freeCompilerArgs.add("-Xallow-reified-type-in-catch")
+        freeCompilerArgs.add("-Xallow-contracts-on-more-functions")
+    }
 }
 
 android {
