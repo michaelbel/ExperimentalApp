@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun MainActivityContent() {
@@ -32,8 +33,8 @@ fun MainActivityContent() {
                 .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = "Hello Android!"
+            Composable(
+                modifier = Modifier.padding(horizontal = 24.dp)
             )
         }
     }
