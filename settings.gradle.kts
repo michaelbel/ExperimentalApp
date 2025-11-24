@@ -1,5 +1,4 @@
 @file:Suppress("UnstableApiUsage")
-
 pluginManagement {
     repositories {
         google {
@@ -20,7 +19,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "KotlinDataClass"
+rootProject.name = "KotlinApp"
 include(":app")

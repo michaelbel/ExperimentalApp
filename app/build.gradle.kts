@@ -25,40 +25,39 @@ kotlin {
 }
 
 android {
-    namespace = "org.michaelbel.kotlin_data_class"
+    namespace = "org.michaelbel.app"
     compileSdk = libs.versions.compile.sdk.get().toInt()
 
     defaultConfig {
-        applicationId = "org.michaelbel.kotlin_data_class"
+        applicationId = "org.michaelbel.app"
         minSdk = libs.versions.min.sdk.get().toInt()
         targetSdk = libs.versions.target.sdk.get().toInt()
         versionCode = gitCommitsCount
         versionName = "1.0.0"
     }
 
-    /*signingConfigs {
+    signingConfigs {
         getByName("debug") {
-            keyAlias = "plurals"
+            keyAlias = "kotlinapp"
             keyPassword = "password"
             storeFile = rootProject.file(".github/debug-key.jks")
             storePassword = "password"
         }
-    }*/
+    }
 
     buildTypes {
         debug {
-            //signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
     buildFeatures {
         compose = true
-        viewBinding = true
     }
 }
 
 base {
-    archivesName.set("KotlinDataClass-v${android.defaultConfig.versionName}(${android.defaultConfig.versionCode})")
+    archivesName.set("KotlinApp-v${android.defaultConfig.versionName}(${android.defaultConfig.versionCode})")
 }
 
 dependencies {
@@ -67,8 +66,6 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.core.splashscreen)
-    implementation(libs.androidx.fragment.compose)
-    implementation(libs.androidx.navigation.compose)
 }
 
 tasks.register("printVersion") {

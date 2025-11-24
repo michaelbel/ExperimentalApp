@@ -1,4 +1,4 @@
-package org.michaelbel.kotlin_data_class.ui
+package org.michaelbel.app.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

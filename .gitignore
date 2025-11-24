@@ -1,17 +1,8 @@
-# Kotlin
 .kotlin
-
-# Gradle
 .gradle
 build
 build-cache
 generated
-
-# Idea
 .idea
-
-/config/keystore_release.jks
-/config/keystore.properties
-
 local.properties
-releaseNotes.txt
+app/debug
