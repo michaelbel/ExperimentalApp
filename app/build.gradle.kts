@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
 
@@ -32,6 +31,7 @@ kotlin {
         freeCompilerArgs.add("-Xnested-type-aliases")
         freeCompilerArgs.add("-Xallow-reified-type-in-catch")
         freeCompilerArgs.add("-Xallow-contracts-on-more-functions")
+        freeCompilerArgs.add("-Xexplicit-backing-fields")
     }
 }
 

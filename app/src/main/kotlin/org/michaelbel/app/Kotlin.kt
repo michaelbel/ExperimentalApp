@@ -1,5 +1,7 @@
 package org.michaelbel.app
 
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlin.contracts.*
 
 //region https://kotlinlang.org/docs/whatsnew22.html#preview-of-context-parameters
@@ -152,5 +154,19 @@ fun <T, F : Failure> Result<T, F>.isHttpError(): Boolean {
     }
     return this is Result.Failed && this.failure is Failure.HttpError
 }
+
+//endregion
+
+//region https://kotlinlang.org/docs/whatsnew23.html#explicit-backing-fields
+
+/*fun ebf() {
+    val city: StateFlow<String>
+        field = MutableStateFlow("")
+
+    fun updateCity(newCity: String) {
+        // Smart casting works automatically
+        city.value = newCity
+    }
+}*/
 
 //endregion
