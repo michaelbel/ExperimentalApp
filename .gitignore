@@ -1,10 +1,7 @@
-.kotlin
+.claude
 .gradle
-build
-build-cache
-generated
 .idea
 !.idea/icon.svg
-.claude
+.kotlin
+build
 local.properties
-app/debug
