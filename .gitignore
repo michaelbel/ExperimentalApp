@@ -4,5 +4,7 @@ build
 build-cache
 generated
 .idea
+!.idea/icon.svg
+.claude
 local.properties
 app/debug
