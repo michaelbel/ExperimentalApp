@@ -1,4 +1,3 @@
-import java.nio.charset.StandardCharsets
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
@@ -7,17 +6,9 @@ plugins {
 }
 
 private val gitCommitsCount: Int by lazy {
-    try {
-        val isWindows = System.getProperty("os.name").contains("Windows", ignoreCase = true)
-        val processBuilder = when {
-            isWindows -> ProcessBuilder("cmd", "/c", "git", "rev-list", "--count", "HEAD")
-            else -> ProcessBuilder("git", "rev-list", "--count", "HEAD")
-        }
-        processBuilder.redirectErrorStream(true)
-        processBuilder.start().inputStream.bufferedReader(StandardCharsets.UTF_8).readLine().trim().toInt()
-    } catch (_: Exception) {
-        1
-    }
+    ProcessBuilder("git", "rev-list", "--count", "HEAD")
+        .redirectErrorStream(true)
+        .start().inputStream.bufferedReader().readLine().trim().toInt()
 }
 
 kotlin {
@@ -75,10 +66,10 @@ dependencies {
     implementation(libs.google.material)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.lifecycle.runtime.compose)
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }
 
 tasks.register("printVersion") {
