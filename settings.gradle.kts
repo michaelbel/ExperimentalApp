@@ -22,5 +22,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "KotlinApp"
+rootProject.name = "ExperimentalApp"
 include(":app")
